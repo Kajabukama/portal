@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
+
+// component
 import './Signup.css';
 import $ from 'jquery';
+
+// toaster react component
 const ReactToastr = require("react-toastr2");
 const { ToastContainer } = ReactToastr;
 const ToastMessageFactory = React.createFactory(ReactToastr.ToastMessage.animation);
@@ -13,16 +17,17 @@ class Signup extends Component {
    constructor(props) {
      super(props);
      this.state = {
-        fname: '',
-        lname: '',
-        email: '',
-        password: '',
-        passwordConfirm: '',
-        mobile: '',
+         users: [],
+         fname: '',
+         lname: '',
+         email: '',
+         password: '',
+         passwordConfirm: '',
+         mobile: '',
      }
 
      this.onSignup = this.onSignup.bind(this);
-     this.valueChnage = this.valueChange.bind(this);
+     this.valueChange = this.valueChange.bind(this);
    }
 
    valueChange = (ev) => {
@@ -30,6 +35,21 @@ class Signup extends Component {
          [ev.target.name]: ev.target.value
       })
    }
+   
+   componentDidMount(){
+    let uri = 'http://localhost/api/users/read.php';
+    $.ajax({
+       url: uri,
+       dataType:'json',
+       cache: false,
+       success: function(data){
+          this.setState({
+             users: data
+          })
+          console.log(this.state.users);
+       }.bind(this)
+    })
+ } 
 
    onSignup = (ev) => {
       this.setState({
