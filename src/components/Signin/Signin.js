@@ -40,7 +40,7 @@ class Signin extends Component {
    render (){
       return (
         <div>
-          <ToastContainer ref="container" toastMessageFactory={ToastMessageFactory} className="toast-bottom-left"/>
+          <ToastContainer ref="container" toastMessageFactory={ToastMessageFactory} className="toast-bottom-right"/>
           <div className="middle-box text-center loginscreen animated fadeInUp">
            <div className="logo-container">
               <img src={require('../../assets/img/logo.png')} alt=""/>
